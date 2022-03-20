@@ -3,7 +3,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class main {
+public class Main {
 
     public static void main(String[] args) {
 
@@ -40,7 +40,7 @@ public class main {
             return;
         }
         int[] array = IntStream.range(0, max - min + 1).map(i -> i + min).toArray();
-        long switches = 0; // switches can be bigger then maximum integer
+        long switches = 0;
         while (switches < array.length * 2L) {
             int first = randomInRange(0, array.length - 1);
             int sec = randomInRange(0, array.length - 1);
@@ -70,28 +70,28 @@ public class main {
         if (min >= max) {
             return;
         }
-        TreeSet<Integer> avl = new TreeSet<>();
-        avl.addAll(IntStream.range(0, max - min + 1).map(i -> i + min).boxed().collect(Collectors.toList()));
-        while (!avl.isEmpty()) {
+        TreeSet<Integer> treeSet = new TreeSet<>();
+        treeSet.addAll(IntStream.range(0, max - min + 1).map(i -> i + min).boxed().collect(Collectors.toList()));
+        while (!treeSet.isEmpty()) {
             int num = randomInRange(min, max);
             int choose = randomInRange(0,1);
-            Integer ciel = avl.ceiling(num);
-            Integer floor = avl.floor(num);
+            Integer ciel = treeSet.ceiling(num);
+            Integer floor = treeSet.floor(num);
             if (choose == 0) {
                 if (floor == null) {
                     System.out.println(ciel);
-                    avl.remove(ciel);
+                    treeSet.remove(ciel);
                 } else {
                     System.out.println(floor);
-                    avl.remove(floor);
+                    treeSet.remove(floor);
                 }
             } else {
-              if (avl.ceiling(num) == null) {
+              if (treeSet.ceiling(num) == null) {
                   System.out.println(floor);
-                  avl.remove(floor);
+                  treeSet.remove(floor);
               } else {
                   System.out.println(ciel);
-                  avl.remove(ciel);              }
+                  treeSet.remove(ciel);              }
             }
         }
     }
