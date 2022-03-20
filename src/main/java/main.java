@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 public class main {
 
     public static void main(String[] args) {
-
+      
     }
 
     public static int randomInRange(int min, int max) {
@@ -17,11 +17,23 @@ public class main {
 
     /**
      * N = number of numbers to print
+     *      The number of switches are 2n rounds because
+     *      this guarantees, that for any positive Integer value the probability for a spot to get changed is over 98%.
+     *      and for a number that smaller than 10
+     *      the probability that an index didn't switch with another one in a round is (n - 1 / n) ^ 2
+     *      and the possibility that the same index has been chosen twice on the same round (1 / n) ^ 2
+     *      because there are two picks.
+     *      so for n rounds it's will be
+     *      ((n-1)/n)^ 2n + (1 / n) ^ 2 ~ 0.1354 but ((n-1) / 2)^ 4n ~ 0.018.
+     *      for example ((99/100) ^ 200) + (1 / 100)^ 200 = 0.1339, and (5436 / 5437) ^ 10874 + (1 / 5437) ^ 10874 = 0.1353.
+     *      (9999 / 10000) ^ 40000 + (1/10000) ^ 40000 = 0.0183 , (1543212 / 1543211 ) ^ 6172848 + (1 / 1543211) ^ 6172848 = 0.01831
+     *      so with 2n rounds of switches the probability that
+     *      every index has been replaced at least one time is 1 - 0.0183 = 0.9817
+     *        O(n) running time and O(n) memory space
+     *       Random print by creating an array with all the numbers to print ,
+     *        and shuffle the array randomly for 2n times.
      * @param min
      * @param max
-     * O(N) running time and O(N) memory space
-     * Random print by creating an array with all the numbers to print ,
-       and shuffle the array randomly for 2N times.
      */
     public static void printNums(int min, int max) {
         if (min >= max) {
@@ -41,29 +53,18 @@ public class main {
             System.out.println(num);
         }
     }
-    // The number of switches are 2N because
-    // this guarantees that the probability for a spot to get changed is over 98%.
-    // approximately for a large number but not larger than the capacity of int
-    // the probability that an index didn't switch with another index in one round is (n - 1 / n) ^ 2
-    // because there are two picks.
-    // so for n round it's will be
-    // ((n-1)/n)^ 2n ~ 0.134 but ((n-1) / 2)^ 4n ~ 0.018
-    // so with 2 rounds of switches the probability that
-    // every index has been replaced at least one time is 1 - 0.018 = 0.982
 
 
-    // second solution
-    // O(N) memory and O(Nlog(N)) runtime
 
     /**
      *
-     * @param min
-     * @param max
      * O(N) memory space O(NlogN) time
-     * Random print by adding the numbers to Avl tree and choose a Number between
-     * min and max and print randomly this number and if the number already was printed
-     * it will print the greatest element that is smaller than the number
-     * or the smallest element that is bigger than the number
+     * Random print by adding the numbers to  TreeSet and choose a number between
+     * min and max and print randomly this number. if the number was already  printed ,
+     * it will print the greatest element that is smaller than the number,
+     * or the smallest element that is bigger than the number.
+     *   @param min
+     *   @param max
      */
     public static void printNums2(int min, int max) {
         if (min >= max) {
@@ -74,25 +75,23 @@ public class main {
         while (!avl.isEmpty()) {
             int num = randomInRange(min, max);
             int choose = randomInRange(0,1);
+            Integer ciel = avl.ceiling(num);
+            Integer floor = avl.floor(num);
             if (choose == 0) {
-                if (avl.floor(num) == null) {
-                    int n = avl.ceiling(num);
-                    System.out.println(n);
-                    avl.remove(n);
+                if (floor == null) {
+                    System.out.println(ciel);
+                    avl.remove(ciel);
                 } else {
-                    int n = avl.floor(num);
-                    System.out.println(n);
-                    avl.remove(n);
+                    System.out.println(floor);
+                    avl.remove(floor);
                 }
             } else {
               if (avl.ceiling(num) == null) {
-                  int n = avl.floor(num);
-                  System.out.println(n);
-                  avl.remove(n);
+                  System.out.println(floor);
+                  avl.remove(floor);
               } else {
-                  int n = avl.ceiling(num);
-                  System.out.println(n);
-                  avl.remove(n);              }
+                  System.out.println(ciel);
+                  avl.remove(ciel);              }
             }
         }
     }
