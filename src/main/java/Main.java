@@ -27,7 +27,7 @@ public class Main {
      *      which means that the index switched with himself.
      *      Thus, for n rounds, the probability one specific index didn't switch places is
      *      ((n-1)/n)^2n + (1 / n ) ^2n
-     *      for n >= 3, from plotting the function.
+     *      For n >= 3, from plotting the function.
      *      ((n-1)/n)^ 2n + (1 / n) ^ 2n ~ 0.1354
      *      That means that the probability that a single number didn't switch location is 13%.
      *      If we make two shuffles the probability will be for n >= 3
@@ -64,7 +64,7 @@ public class Main {
      *
      * O(N) memory space O(NlogN) time
      * Random print by adding the numbers to  TreeSet and choose a number between
-     * min and max and print randomly this number. if the number was already  printed,
+     * min and max and print randomly this number. If the number was already  printed,
      * it will print the greatest element that is smaller than the number,
      * or the smallest element that is bigger than the number.
      *   @param min minimum number
