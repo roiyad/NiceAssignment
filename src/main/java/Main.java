@@ -36,9 +36,6 @@ public class Main {
      *      the index has been replaced at least one time is 1 - 0.0183 = 0.9817 = 98%.
      *      If we want to increase the probability that every index was chosen we can increase the numOfShuffles,
      *      but this will also increase our running time.
-     *        O(n) running time and O(n) memory space
-     *       Random print by creating an array with all the numbers to print,
-     *        and shuffle the array randomly for 2n times.
      * @param min minimum number
      * @param max maximum number
      */
