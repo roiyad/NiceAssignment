@@ -23,21 +23,21 @@ public class Main {
      *
      *      For one random choice, the probability that an index wasn't chosen is (n-1 / n )
      *      For a switch (which is 2 random choices), the probability is ((n-1)/n)^2 + (1 / n ) ^2.
-     *      When the last addition is the situation, when the same index was selected twice in a switch
-     *      , which means that the index switched with himself.
+     *      When the last addition is the situation, when the same index was selected twice in a switch,
+     *      which means that the index switched with himself.
      *      Thus, for n rounds, the probability one specific index didn't switch places is
      *      ((n-1)/n)^2n + (1 / n ) ^2n
-     *      for n >= 3 , from plotting the function .
+     *      for n >= 3, from plotting the function.
      *      ((n-1)/n)^ 2n + (1 / n) ^ 2n ~ 0.1354
      *      That means that the probability that a single number didn't switch location is 13%.
      *      If we make two shuffles the probability will be for n >= 3
      *      ((n-1) / 2)^ 4n ~ 0.018.
      *      so with 2n rounds of switches the probability that
-     *      every index has been replaced at least one time is 1 - 0.0183 = 0.9817 = 98%.
+     *      the index has been replaced at least one time is 1 - 0.0183 = 0.9817 = 98%.
      *      If we want to increase the probability that every index was chosen we can increase the numOfShuffles,
      *      but this will also increase our running time.
      *        O(n) running time and O(n) memory space
-     *       Random print by creating an array with all the numbers to print ,
+     *       Random print by creating an array with all the numbers to print,
      *        and shuffle the array randomly for 2n times.
      * @param min minimum number
      * @param max maximum number
@@ -67,7 +67,7 @@ public class Main {
      *
      * O(N) memory space O(NlogN) time
      * Random print by adding the numbers to  TreeSet and choose a number between
-     * min and max and print randomly this number. if the number was already  printed ,
+     * min and max and print randomly this number. if the number was already  printed,
      * it will print the greatest element that is smaller than the number,
      * or the smallest element that is bigger than the number.
      *   @param min minimum number
