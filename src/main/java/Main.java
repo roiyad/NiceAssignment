@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Main {
-
+    static final int numOfShuffles = 2;
     public static void main(String[] args) {
 
     }
@@ -17,18 +17,19 @@ public class Main {
 
     /**
      * N = number of numbers to print
-     *      The number of switches are 2n rounds because
-     *      this guarantees, that for any positive Integer value the probability for a spot to get changed is over 98%.
-     *      and for a number that smaller than 10
-     *      the probability that an index didn't switch with another one in a round is (n - 1 / n) ^ 2
-     *      and the possibility that the same index has been chosen twice on the same round (1 / n) ^ 2
-     *      because there are two picks.
-     *      so for n rounds it's will be
-     *      ((n-1)/n)^ 2n + (1 / n) ^ 2 ~ 0.1354 but ((n-1) / 2)^ 4n ~ 0.018.
-     *      for example ((99/100) ^ 200) + (1 / 100)^ 200 = 0.1339, and (5436 / 5437) ^ 10874 + (1 / 5437) ^ 10874 = 0.1353.
-     *      (9999 / 10000) ^ 40000 + (1/10000) ^ 40000 = 0.0183 , (1543212 / 1543211 ) ^ 6172848 + (1 / 1543211) ^ 6172848 = 0.01831
+     *      This approach trades off randomization for efficiency.
+     *      It is O(n) running time and O(n) memory space, but for each draw,
+     *      there approximately 2% that the draw is not random.
+     *      For one random choice, the probability that an index wasn't chosen is (n-1 / n )
+     *      For a switch (which is 2 random choices), the probability is ((n-1)/n)^2 + (1 / n ) ^2.
+     *      When the last addition is the situation, when the same index was selected twice and as a result did not switch also.
+     *      Thus, for n rounds, the probability one specific index didn't switch places is
+     *      ((n-1)/n)^2n + (1 / n ) ^2n
+     *      for n >= 3 , from plotting the function .
+     *      ((n-1)/n)^ 2n + (1 / n) ^ 2n ~ 0.1354 but ((n-1) / 2)^ 4n ~ 0.018.
      *      so with 2n rounds of switches the probability that
-     *      every index has been replaced at least one time is 1 - 0.0183 = 0.9817
+     *      every index has been replaced at least one time is 1 - 0.0183 = 0.9817.
+     *      If we want to increase the probability that every index was chosen we can increase the numOfShuffles.
      *        O(n) running time and O(n) memory space
      *       Random print by creating an array with all the numbers to print ,
      *        and shuffle the array randomly for 2n times.
@@ -41,7 +42,7 @@ public class Main {
         }
         int[] array = IntStream.range(0, max - min + 1).map(i -> i + min).toArray();
         long switches = 0;
-        while (switches < array.length * 2L) {
+        while (switches < (long) array.length * numOfShuffles) {
             int first = randomInRange(0, array.length - 1);
             int sec = randomInRange(0, array.length - 1);
             int temp = array[first];
@@ -86,7 +87,7 @@ public class Main {
                     treeSet.remove(floor);
                 }
             } else {
-              if (treeSet.ceiling(num) == null) {
+              if (ciel == null) {
                   System.out.println(floor);
                   treeSet.remove(floor);
               } else {
