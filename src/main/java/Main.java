@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Main {
-    static final int numOfShuffles = 2;
+    static final int NUM_OF_SHUFFLES = 2;
     public static void main(String[] args) {
 
     }
@@ -34,7 +34,7 @@ public class Main {
      *      ((n-1) / 2)^ 4n ~ 0.018.
      *      so with 2n rounds of switches the probability that
      *      the index has been replaced at least one time is 1 - 0.0183 = 0.9817 = 98%.
-     *      If we want to increase the probability that every index was chosen we can increase the numOfShuffles,
+     *      If we want to increase the probability that every index was chosen we can increase the NUM_OF_SHUFFLES,
      *      but this will also increase our running time.
      * @param min minimum number
      * @param max maximum number
@@ -45,7 +45,7 @@ public class Main {
         }
         int[] array = IntStream.range(0, max - min + 1).map(i -> i + min).toArray();
         long switches = 0;
-        while (switches < (long) array.length * numOfShuffles) {
+        while (switches < (long) array.length * NUM_OF_SHUFFLES) {
             int first = randomInRange(0, array.length - 1);
             int sec = randomInRange(0, array.length - 1);
             int temp = array[first];
