@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 public class main {
 
     public static void main(String[] args) {
-      
+
     }
 
     public static int randomInRange(int min, int max) {
@@ -32,8 +32,8 @@ public class main {
      *        O(n) running time and O(n) memory space
      *       Random print by creating an array with all the numbers to print ,
      *        and shuffle the array randomly for 2n times.
-     * @param min
-     * @param max
+     * @param min minimum number
+     * @param max maximum number
      */
     public static void printNums(int min, int max) {
         if (min >= max) {
@@ -63,8 +63,8 @@ public class main {
      * min and max and print randomly this number. if the number was already  printed ,
      * it will print the greatest element that is smaller than the number,
      * or the smallest element that is bigger than the number.
-     *   @param min
-     *   @param max
+     *   @param min minimum number
+     *   @param max maximum number
      */
     public static void printNums2(int min, int max) {
         if (min >= max) {
